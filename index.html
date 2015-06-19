@@ -4,12 +4,41 @@
     <link rel="stylesheet" type="text/css" href="/main.css">
     <title>Stopclock</title>
     <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+
+<script>
+    
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var fiveMinutes = 60 * 1,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };    
+    
+</script>
+
+
 </head>
 
 <body>
 
     <div id="timer">
-        00:43:29    <!-- cool & fancy timer code goes here -->  
+        <span id="time">01:00</span>    <!-- cool & fancy timer code goes here -->  
     </div>
 
     <div id="quote">   
