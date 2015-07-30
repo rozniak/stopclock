@@ -6,28 +6,51 @@
     <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
 
 <script>
+    var SECOND = 1000;
+    var MINUTE = SECOND * 60;
+    var HOUR = MINUTE * 60;
+    var DAY = HOUR * 24;
 
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
+    function startTimer(endDate, titleText, timerText) {
         setInterval(function () {
-            minutes = parseInt(timer / 60, 10)
-            seconds = parseInt(timer % 60, 10);
+            var currentDate = new Date();
+            var timeDifference = endDate - currentDate;
+            var endDateReached = timeDifference < 0;
 
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+            timeDifference = Math.abs(timeDifference);
 
-            display.textContent = minutes + ":" + seconds;
+            var dayDifference = Math.floor(timeDifference / DAY);
 
-            if (--timer < 0) {
-                timer = duration;
+            // These smaller units need to have the next largest unit
+            // modulo'd into 'em first otherwise they will return a tonne
+            // of hours/minutes/seconds instead
+            hourDifference = Math.floor((timeDifference % DAY) / HOUR);
+            var minuteDifference = Math.floor((timeDifference % HOUR) / MINUTE);
+            var secondDifference = Math.floor((timeDifference % MINUTE) / SECOND);
+
+            if (endDateReached)
+            {
+                titleText.textContent = "Since HTTYD 2 Started";
+                timerText.textContent = hourDifference + "\'" + minuteDifference + ":" + secondDifference;
             }
+            else
+            {
+                timerText.textContent = dayDifference + "\"" + hourDifference + "\'" +
+                                        minuteDifference + ":" + secondDifference;
+            }
+            
+
         }, 1000);
     }
 
     window.onload = function () {
-        var fiveMinutes = 60 * 1,
-            display = document.querySelector('#time');
-        startTimer(fiveMinutes, display);
+        // Change this to change what the clock ticks down to
+        var targetDate = new Date('2015-07-30T18:30:00');
+
+        title = document.querySelector("#title");
+        timer = document.querySelector('#time');
+
+        startTimer(targetDate, title, timer);
     };
 
 </script>
@@ -38,11 +61,11 @@
 <body>
 
     <div id="timer">
-        <span id="time">01:00</span>    <!-- cool & fancy timer code goes here -->
+        <span id="time">0"0'0:0</span>    <!-- cool & fancy timer code goes here -->
     </div>
 
     <div id="title">
-       Until HTTYD 2 Starts <!-- text changes between "until httyd 1 or 2 starts" and "since it started"  -->
+       Until HTTYD 2 Starts
     </div>
 
     <div id="join">
