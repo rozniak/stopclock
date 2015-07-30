@@ -1,12 +1,12 @@
 <!Doctype HTML>
-    
+
 <head>
     <link rel="stylesheet" type="text/css" href="main.css">
     <title>Stopclock</title>
     <link href='http://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
 
 <script>
-    
+
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         setInterval(function () {
@@ -28,8 +28,8 @@
         var fiveMinutes = 60 * 1,
             display = document.querySelector('#time');
         startTimer(fiveMinutes, display);
-    };    
-    
+    };
+
 </script>
 
 
@@ -38,19 +38,19 @@
 <body>
 
     <div id="timer">
-        <span id="time">01:00</span>    <!-- cool & fancy timer code goes here -->  
+        <span id="time">01:00</span>    <!-- cool & fancy timer code goes here -->
     </div>
 
-    <div id="quote">   
-        "I reset the timer"   <!-- cool & fancy text goes here maybe -->
+    <div id="title">
+       Until HTTYD 2 Starts <!-- text changes between "until httyd 1 or 2 starts" and "since it started"  -->
     </div>
 
-    <div id="help">
-        What is happening?
+    <div id="join">
+        Join the #HTTYD Movie Night on IRC
     </div>
-    
-    <div id="ad">   
-        <p class="txt">super hidden ad/sponsored link goes here</p>
+
+    <div id="footer">
+        <p class="txt"><a href="http://www.hteam.co">developed by the #HTTYD HTEAM</a> &copy;2015</p>
     </div>
 
 </body>
