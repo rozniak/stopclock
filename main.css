@@ -32,3 +32,20 @@ a    {
     color: #aaaaaa
 
 }
+
+video, input {
+    display: block;
+}
+
+input {
+    width: 100%;
+}
+
+.info {
+    background-color: aqua;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
