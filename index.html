@@ -11,36 +11,37 @@
     var HOUR = MINUTE * 60;
     var DAY = HOUR * 24;
 
-    function startTimer(endDate, titleText, timerText) {
-        setInterval(function () {
-            var currentDate = new Date();
-            var timeDifference = endDate - currentDate;
-            var endDateReached = timeDifference < 0;
+    function startTimer(_endDate, _titleText, _timerText) {
+        setInterval(function () { updateTime(_endDate, _titleText, _timerText); }, 1000);
+    }
 
-            timeDifference = Math.abs(timeDifference);
+    function updateTime(endDate, titleText, timerText)
+    {
+        var currentDate = new Date();
+        var timeDifference = endDate - currentDate;
+        var endDateReached = timeDifference < 0;
 
-            var dayDifference = Math.floor(timeDifference / DAY);
+        timeDifference = Math.abs(timeDifference);
 
-            // These smaller units need to have the next largest unit
-            // modulo'd into 'em first otherwise they will return a tonne
-            // of hours/minutes/seconds instead
-            hourDifference = Math.floor((timeDifference % DAY) / HOUR);
-            var minuteDifference = Math.floor((timeDifference % HOUR) / MINUTE);
-            var secondDifference = Math.floor((timeDifference % MINUTE) / SECOND);
+        var dayDifference = Math.floor(timeDifference / DAY);
 
-            if (endDateReached)
-            {
-                titleText.textContent = "Since HTTYD 2 Started";
-                timerText.textContent = hourDifference + "\'" + minuteDifference + ":" + secondDifference;
-            }
-            else
-            {
-                timerText.textContent = dayDifference + "\"" + hourDifference + "\'" +
-                                        minuteDifference + ":" + secondDifference;
-            }
-            
+        // These smaller units need to have the next largest unit
+        // modulo'd into 'em first otherwise they will return a tonne
+        // of hours/minutes/seconds instead
+        var hourDifference = Math.floor((timeDifference % DAY) / HOUR);
+        var minuteDifference = Math.floor((timeDifference % HOUR) / MINUTE);
+        var secondDifference = Math.floor((timeDifference % MINUTE) / SECOND);
 
-        }, 1000);
+        if (endDateReached)
+        {
+            titleText.textContent = "Since HTTYD 2 Started";
+            timerText.textContent = hourDifference + "\'" + minuteDifference + ":" + secondDifference;
+        }
+        else
+        {
+            timerText.textContent = dayDifference + "\"" + hourDifference + "\'" +
+                                    minuteDifference + ":" + secondDifference;
+        }
     }
 
     window.onload = function () {
@@ -50,6 +51,7 @@
         title = document.querySelector("#title");
         timer = document.querySelector('#time');
 
+        updateTime(targetDate, title, timer);
         startTimer(targetDate, title, timer);
     };
 
